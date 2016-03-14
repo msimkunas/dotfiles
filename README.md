@@ -4,7 +4,7 @@ The dotfiles for my local development environment. This "readme" is intended as 
 
 # Warning
 
-This installation script **deletes certain files and folders** prior to installation. These dotfiles and their installation script come without warranty of any kind. Use this script at your own risk.
+This installation script **deletes certain files** prior to installation. These dotfiles and their installation script come without warranty of any kind. Use this script at your own risk.
 
 # Installation
 
