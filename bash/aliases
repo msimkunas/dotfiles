@@ -1,0 +1,14 @@
+# Aliases
+if [[ "$(uname)" == "Linux" ]]; then
+    alias ls="ls -l --color=auto"
+else
+    alias ls="ls -lG"
+fi
+
+alias sudo="sudo "
+alias la="ls -a"
+alias ..="cd .."
+alias ...="cd ../.."
+alias mkdir="mkdir -pv"
+alias editvimrc="vim ~/.vimrc" 
+alias wdd="cd ~/.dotfiles"

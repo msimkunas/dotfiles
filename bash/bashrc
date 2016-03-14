@@ -1,0 +1,16 @@
+# Source the exports
+source ~/.exports
+
+# Source the aliases
+source ~/.aliases
+
+# Source various utilities
+source ~/.utilities
+
+# Sudo autocompletion
+complete -cf sudo
+
+# Source local bash configurations
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi

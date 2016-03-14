@@ -1,0 +1,135 @@
+execute pathogen#infect()
+
+syntax on
+set background=dark
+colorscheme hybrid
+
+" indent files based on filetype
+filetype plugin indent on
+
+" make backspace behave normally
+set backspace=2
+" display line numbers
+set number
+" number of columns in a tab
+set tabstop=4
+" number of columns to shift tabs using << and >> operators
+set shiftwidth=4
+" convert tabs to spaces
+set expandtab
+
+" Ignore letter case when searching
+set ignorecase
+" If the search pattern is lowercase, ignore case
+set smartcase
+
+set incsearch
+set nohlsearch
+
+set nowrap
+
+set splitbelow
+set splitright
+
+" preserve undo history
+set hidden
+
+" store swap and backup files elsewhere (not with the project files)
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+
+" Allow resizing vim splits with a mouse in tmux
+set mouse+=a
+if &term =~ '^screen'
+    set ttymouse=xterm2
+endif
+
+" set up airline
+let g:airline#extensions#ctrlp#color_template = 'normal'
+let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 1
+
+" disable powerline symbols
+let g:airline_powerline_fonts = 0
+let g:tmuxline_powerline_separators = 0
+
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+
+" set up delimitMate to autoindent after braces
+let delimitMate_expand_cr=1
+
+" to enable syntax highlighting of less files
+au BufNewFile,BufRead *.less set filetype=less
+
+" Various shortcuts
+"let mapleader = "\<Space>"
+let mapleader = ","
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>p :CtrlP .<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>a :wq<CR>
+nnoremap <Leader>l :vsp<CR>
+nnoremap <Leader>k :sp<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Quicker buffer switching
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <Leader>1 <Plug>AirlineSelectTab1
+nmap <Leader>2 <Plug>AirlineSelectTab2
+nmap <Leader>3 <Plug>AirlineSelectTab3
+nmap <Leader>4 <Plug>AirlineSelectTab4
+nmap <Leader>5 <Plug>AirlineSelectTab5
+nmap <Leader>6 <Plug>AirlineSelectTab6
+nmap <Leader>7 <Plug>AirlineSelectTab7
+nmap <Leader>8 <Plug>AirlineSelectTab8
+nmap <Leader>9 <Plug>AirlineSelectTab9
+
+" store cache in a particular directory (as per http://stackoverflow.com/a/22784889)
+let g:ctrlp_cache_dir = $HOME."/.cache/ctrlp"
+
+" ignore certain directories while scanning in ctrlp
+set wildignore+=*/vendor/*,*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.tar.gz
+
+" use ag for scanning
+if executable('ag')
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
+" override php syntax highlighting
+function! PhpSyntaxOverride()
+    hi! def link phpDocTags  phpDefine
+    hi! def link phpDocParam phpType
+endfunction
+
+augroup phpSyntaxOverride
+    autocmd!
+    autocmd FileType php call PhpSyntaxOverride()
+augroup END
+
+" set up the php documentor
+let g:pdv_template_dir = $HOME."/.vim/bundle/pdv/templates_snip"
+nnoremap <Leader>d :call pdv#DocumentWithSnip()<CR>
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+" Syntastic configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Only ask once before sourcing .lvimrc files and remeber the decision for the future
+let g:localvimrc_persistent = 2

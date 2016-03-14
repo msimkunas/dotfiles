@@ -1,0 +1,15 @@
+# Enable 256 color support in the terminal
+export TERM="screen-256color"
+
+# Project template dir
+export PROJECT_TEMPLATES="$HOME/.project-templates"
+
+# Set the default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# Export npm prefix path
+export PATH="$HOME/.local/bin:$PATH"
+
+# Prompt colors (generated with http://bashrcgenerator.com/)
+export PS1="\[\033[38;5;252m\][\[$(tput sgr0)\]\[\033[38;5;108m\]\u\[$(tput sgr0)\]\[\033[38;5;252m\]@\[$(tput sgr0)\]\[\033[38;5;102m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;252m\]\W\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;108m\]\\$\[$(tput sgr0)\]\[\033[38;5;252m\]]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
