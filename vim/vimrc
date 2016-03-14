@@ -113,10 +113,6 @@ augroup phpSyntaxOverride
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-" set up the php documentor
-let g:pdv_template_dir = $HOME."/.vim/bundle/pdv/templates_snip"
-nnoremap <Leader>d :call pdv#DocumentWithSnip()<CR>
-
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
