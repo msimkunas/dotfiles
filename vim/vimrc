@@ -31,11 +31,20 @@ set nowrap
 set splitbelow
 set splitright
 
+" set the working dir to that of the currently open buffer
+set autochdir
+
 " preserve undo history
 set hidden
 
 " Load file changes without prompting
 set autoread
+
+" wrap lines
+set wrap
+set linebreak
+set showbreak=>>>
+set textwidth=80
 
 " store swap and backup files elsewhere (not with the project files)
 set backupdir=~/.vim/backup//
@@ -111,4 +120,3 @@ let g:localvimrc_persistent = 2
 " set syntax highlighting for specific filetypes
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.asm set filetype=nasm
-
