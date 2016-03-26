@@ -1,9 +1,6 @@
 [submodule "vim/bundle/ultisnips"]
 	path = vim/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips
-[submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "vim/bundle/php"]
 	path = vim/bundle/php
 	url = https://github.com/StanAngeloff/php.vim.git
@@ -31,9 +28,6 @@
 [submodule "vim/bundle/php-refactoring-toolbox"]
 	path = vim/bundle/php-refactoring-toolbox
 	url = https://github.com/adoy/vim-php-refactoring-toolbox.git
-[submodule "vim/bundle/less"]
-	path = vim/bundle/less
-	url = https://github.com/groenewege/vim-less
 [submodule "vim/bundle/delimit-mate"]
 	path = vim/bundle/delimit-mate
 	url = https://github.com/Raimondi/delimitMate.git

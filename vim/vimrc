@@ -53,9 +53,6 @@ let g:tmuxline_powerline_separators = 0
 " set up delimitMate to autoindent after braces
 let delimitMate_expand_cr=1
 
-" to enable syntax highlighting of less files
-au BufNewFile,BufRead *.less set filetype=less
-
 " Various shortcuts
 let mapleader = ","
 nnoremap <Leader>o :CtrlP<CR>
@@ -110,3 +107,8 @@ let g:syntastic_check_on_wq = 0
 
 " Only ask once before sourcing .lvimrc files and remeber the decision for the future
 let g:localvimrc_persistent = 2
+
+" set syntax highlighting for specific filetypes
+au BufNewFile,BufRead *.less set filetype=less
+au BufRead,BufNewFile *.asm set filetype=nasm
+
