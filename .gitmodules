@@ -37,15 +37,9 @@
 [submodule "vim/bundle/delimit-mate"]
 	path = vim/bundle/delimit-mate
 	url = https://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/airline-themes"]
-	path = vim/bundle/airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes.git
 [submodule "vim/bundle/hybrid"]
 	path = vim/bundle/hybrid
 	url = https://github.com/w0ng/vim-hybrid.git
-[submodule "vim/bundle/airline"]
-	path = vim/bundle/airline
-	url = https://github.com/vim-airline/vim-airline.git
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim

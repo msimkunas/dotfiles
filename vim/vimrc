@@ -47,18 +47,8 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-" set up airline
-let g:airline#extensions#ctrlp#color_template = 'normal'
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-
 " disable powerline symbols
-let g:airline_powerline_fonts = 0
 let g:tmuxline_powerline_separators = 0
-
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
 
 " set up delimitMate to autoindent after braces
 let delimitMate_expand_cr=1
@@ -70,12 +60,10 @@ au BufNewFile,BufRead *.less set filetype=less
 let mapleader = ","
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>p :CtrlP .<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>a :wq<CR>
-nnoremap <Leader>l :vsp<CR>
-nnoremap <Leader>k :sp<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -83,18 +71,6 @@ nnoremap <C-H> <C-W><C-H>
 
 " Save file using sudo (http://stackoverflow.com/a/7078429)
 cmap w!! w !sudo tee > /dev/null %
-
-" Quicker buffer switching
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <Leader>1 <Plug>AirlineSelectTab1
-nmap <Leader>2 <Plug>AirlineSelectTab2
-nmap <Leader>3 <Plug>AirlineSelectTab3
-nmap <Leader>4 <Plug>AirlineSelectTab4
-nmap <Leader>5 <Plug>AirlineSelectTab5
-nmap <Leader>6 <Plug>AirlineSelectTab6
-nmap <Leader>7 <Plug>AirlineSelectTab7
-nmap <Leader>8 <Plug>AirlineSelectTab8
-nmap <Leader>9 <Plug>AirlineSelectTab9
 
 " store cache in a particular directory (as per http://stackoverflow.com/a/22784889)
 let g:ctrlp_cache_dir = $HOME."/.cache/ctrlp"
