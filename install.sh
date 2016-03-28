@@ -2,7 +2,10 @@
 
 CURRENT_OS=$(uname)
 USERNAME=""
-DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .bashrc .bash_profile .aliases .exports .utilities .inputrc)
+DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .bashrc
+.bash_profile .aliases .exports .utilities .inputrc .i3blocks.conf
+.config/i3/config .Xresources .xinitrc .scripts/change_layout.sh .mutt/colors
+.mutt/mailcap .mutt/muttrc)
 
 if [[ "${CURRENT_OS}" == "Darwin" ]]; then
     HOME_PREFIX=/Users
@@ -31,30 +34,53 @@ remove_initial() {
             cat "${filename}" > "${backup_path}"
             
             # delete the existing dotfile
-            rm -f "${filename}"
+            rm -fv "${filename}"
         fi
     done
 }
 
 link_dotfiles() {
+    # create some directories if necessary
+    local dirs=(.config/i3 .scripts)
+    
+    for dir in "${dirs[@]}"
+    do
+        local dirname="${HOME}"/"${dir}"
+        if [ ! -d "${dirname}" ]; then
+            echo "${dirname} doesn't exist, creating..."
+            mkdir -pv "${dirname}"
+        fi
+    done
+
     echo "Linking dotfiles..."
     # Create the symlinks
 
     # ...for vim
-    ln -sf "${DOTFILES_DIR}"/vim "${HOME_DIR}"/.vim
-    ln -sf "${DOTFILES_DIR}"/vim/vimrc "${HOME_DIR}"/.vimrc
+    ln -sfv "${DOTFILES_DIR}"/vim "${HOME_DIR}"/.vim
+    ln -sfv "${DOTFILES_DIR}"/vim/vimrc "${HOME_DIR}"/.vimrc
     # ...for git
-    ln -sf "${DOTFILES_DIR}"/git/gitconfig "${HOME_DIR}"/.gitconfig
+    ln -sfv "${DOTFILES_DIR}"/git/gitconfig "${HOME_DIR}"/.gitconfig
     # ...for tmux
-    ln -sf "${DOTFILES_DIR}"/tmux/tmux.conf "${HOME_DIR}"/.tmux.conf
-    ln -sf "${DOTFILES_DIR}"/tmux/tmux_snapshot.conf "${HOME_DIR}"/.tmux_snapshot.conf
+    ln -sfv "${DOTFILES_DIR}"/tmux/tmux.conf "${HOME_DIR}"/.tmux.conf
+    ln -sfv "${DOTFILES_DIR}"/tmux/tmux_snapshot.conf "${HOME_DIR}"/.tmux_snapshot.conf
     # ...for bash
-    ln -sf "${DOTFILES_DIR}"/bash/bash_profile "${HOME_DIR}"/.bash_profile
-    ln -sf "${DOTFILES_DIR}"/bash/bashrc "${HOME_DIR}"/.bashrc
-    ln -sf "${DOTFILES_DIR}"/bash/aliases "${HOME_DIR}"/.aliases
-    ln -sf "${DOTFILES_DIR}"/bash/exports "${HOME_DIR}"/.exports
-    ln -sf "${DOTFILES_DIR}"/bash/utilities "${HOME_DIR}"/.utilities
-    ln -sf "${DOTFILES_DIR}"/bash/inputrc "${HOME_DIR}"/.inputrc
+    ln -sfv "${DOTFILES_DIR}"/bash/bash_profile "${HOME_DIR}"/.bash_profile
+    ln -sfv "${DOTFILES_DIR}"/bash/bashrc "${HOME_DIR}"/.bashrc
+    ln -sfv "${DOTFILES_DIR}"/bash/aliases "${HOME_DIR}"/.aliases
+    ln -sfv "${DOTFILES_DIR}"/bash/exports "${HOME_DIR}"/.exports
+    ln -sfv "${DOTFILES_DIR}"/bash/utilities "${HOME_DIR}"/.utilities
+    ln -sfv "${DOTFILES_DIR}"/bash/inputrc "${HOME_DIR}"/.inputrc
+    # ...for i3
+    ln -sfv "${DOTFILES_DIR}"/i3/config "${HOME_DIR}"/.config/i3/config
+    ln -sfv "${DOTFILES_DIR}"/i3/i3blocks.conf "${HOME_DIR}"/.i3blocks.conf
+    ln -sfv "${DOTFILES_DIR}"/i3/xinitrc "${HOME_DIR}"/.xinitrc
+    # ...for mutt
+    ln -sfv "${DOTFILES_DIR}"/mutt/colors "${HOME_DIR}"/.mutt/colors
+    ln -sfv "${DOTFILES_DIR}"/mutt/mailcap "${HOME_DIR}"/.mutt/mailcap
+    ln -sfv "${DOTFILES_DIR}"/mutt/muttrc "${HOME_DIR}"/.mutt/muttrc
+    # ...misc
+    ln -sfv "${DOTFILES_DIR}"/misc/Xresources "${HOME_DIR}"/.Xresources
+    ln -sfv "${DOTFILES_DIR}"/scripts/change_layout.sh "${HOME_DIR}"/.scripts/change_layout.sh
 }
 
 # Chown the dotfiles

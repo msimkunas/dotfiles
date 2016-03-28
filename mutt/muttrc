@@ -1,0 +1,40 @@
+set header_cache = $HOME/.cache/mutt
+
+# use an external tool to view HTML mail automatically
+set mailcap_path = $HOME/.mutt/mailcap
+auto_view text/html
+
+# try to view mail in plaintext if possible
+alternative_order text/plain text/html
+
+# don't wait when showing notification messages
+set sleep_time = 0
+
+# sort the alias file before using it
+set alias_file = $HOME/.mutt/aliases
+set sort_alias = alias
+set reverse_alias = yes
+source $alias_file
+
+# source some colors
+source $HOME/.mutt/colors
+
+# set the index format
+set date_format="%Y-%m-%d %T"
+set index_format="%2C | %Z [%d] %-30.30F (%-4.4c) %s"
+
+# some vi-like key mappings
+bind pager j next-line
+bind pager k previous-line
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry
+
+# enable threaded view
+set sort = 'threads'
+
+# Set up accounts
+source $HOME/.mutt/accounts/init
