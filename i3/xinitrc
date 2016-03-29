@@ -35,6 +35,8 @@ fi
 compton -cCG -l -7 -t -7 --shadow-exclude "class_g = 'Firefox' && argb" &
 #feh --bg-max ~/path/to/image &
 
-source $HOME/.xinitrc_local
+if [ -f $HOME/.xinitrc_local ]; then
+    source $HOME/.xinitrc_local
+fi
 
 exec i3
