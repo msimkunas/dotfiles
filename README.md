@@ -32,11 +32,6 @@ Folder hooks, keybindings and any other account-related configuration should be
 placed in `~/.mutt/accounts/init`. An example has been provided
 (`~/.dotfiles/mutt/init.example`).
 
-# msmtp
-
-Account-specific details for msmtp should be placed in `~/.msmtprc`. An example
-has bee provided (`~/.dotfiles/mutt/msmtprc.example`).
-
 # Local overrides
 
 The following local configurations are supported:
@@ -48,7 +43,6 @@ The following local configurations are supported:
 - `.mutt/accounts/init`
 - `.mutt/accounts/account.*`
 - `.mutt/aliases`
-- `.msmtprc`
 
 # Custom scripts
 
