@@ -36,5 +36,8 @@ bind attach,index G last-entry
 # enable threaded view
 set sort = 'threads'
 
+# source optional local configs (https://dev.mutt.org/trac/wiki/ConfigTricks)
+source `FILE=$HOME/.mutt/muttrc_local; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
+
 # Set up accounts
 source $HOME/.mutt/accounts/init
