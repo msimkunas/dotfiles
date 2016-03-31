@@ -4,8 +4,9 @@ CURRENT_OS=$(uname)
 USERNAME=""
 DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .bashrc
 .bash_profile .aliases .exports .utilities .inputrc .i3blocks.conf
-.config/i3/config .Xresources .xinitrc .scripts/change_layout.sh .mutt/colors
-.mutt/mailcap .mutt/muttrc)
+.config/i3/config .Xresources .xinitrc .scripts/change_layout.sh
+.scripts/feh_browser.sh .mutt/colors .mutt/mailcap .mutt/muttrc)
+MAKE_BACKUPS=true
 
 if [[ "${CURRENT_OS}" == "Darwin" ]]; then
     HOME_PREFIX=/Users
@@ -14,7 +15,14 @@ else
 fi
 
 usage() {
-    echo "Usage: $0 -u username"
+cat << EOF
+Usage: $0 -u username
+
+Available options:
+    -c perform a "clean" installation, i.e. don't make any backups of existing
+    files prior to deleting them
+    -h shows this help text
+EOF
     exit 1
 }
 
@@ -27,11 +35,13 @@ remove_initial() {
     do
         local filename="${HOME}"/"${dotfile}"
         if [ -f "${filename}" ]; then
-            local backup_path="${filename}.bak"
+            if [ "${MAKE_BACKUPS}" = true ]; then
+                local backup_path="${filename}.bak"
 
-            # make a backup of the existing file
-            echo "${filename} exists, saving a backup to: ${backup_path}"
-            cat "${filename}" > "${backup_path}"
+                # make a backup of the existing file
+                echo "${filename} exists, saving a backup to: ${backup_path}"
+                cat "${filename}" > "${backup_path}"
+            fi
             
             # delete the existing dotfile
             rm -fv "${filename}"
@@ -41,7 +51,7 @@ remove_initial() {
 
 link_dotfiles() {
     # create some directories if necessary
-    local dirs=(.config/i3 .scripts)
+    local dirs=(.config/i3 .scripts .mutt .vim)
     
     for dir in "${dirs[@]}"
     do
@@ -81,6 +91,7 @@ link_dotfiles() {
     # ...misc
     ln -sfv "${DOTFILES_DIR}"/misc/Xresources "${HOME_DIR}"/.Xresources
     ln -sfv "${DOTFILES_DIR}"/scripts/change_layout.sh "${HOME_DIR}"/.scripts/change_layout.sh
+    ln -sfv "${DOTFILES_DIR}"/scripts/feh_browser.sh "${HOME_DIR}"/.scripts/feh_browser.sh
 }
 
 # Chown the dotfiles
@@ -93,7 +104,7 @@ chown_dotfiles() {
     done
 }
 
-while getopts ":hu:g:" opt; do
+while getopts ":hu:c" opt; do
     case "${opt}" in
         h)
             usage
@@ -108,6 +119,9 @@ while getopts ":hu:g:" opt; do
             else
                 GROUP="${USERNAME}"
             fi
+            ;;
+        c)
+            MAKE_BACKUPS=false
             ;;
         *) 
             usage 
