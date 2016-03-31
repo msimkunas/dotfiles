@@ -33,8 +33,8 @@ bind pager G bottom
 bind attach,index g first-entry
 bind attach,index G last-entry
 
-# enable threaded view
-set sort = 'threads'
+# sort messages by date received
+set sort = 'date'
 
 # source optional local configs (https://dev.mutt.org/trac/wiki/ConfigTricks)
 source `FILE=$HOME/.mutt/muttrc_local; if [ ! -s "$FILE" ]; then FILE=/dev/null;fi;echo "$FILE"`
