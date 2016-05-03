@@ -20,22 +20,22 @@ endsnippet
 snippet doc_f "doc_f"
 /**
  * $2
+ *
  * @return ${4:void}
- * @author ${5:`!v g:snips_author`}
  **/
-${1:public }function ${2:someFunc}(${3})
-{${6}
+${1:public }function ${2:someFunc}(${3}) {
+	${6}
 }
 endsnippet
 
 snippet doc_i "doc_i"
 /**
+ *
  * $1
- * @package ${2:default}
- * @author ${3:`!v g:snips_author`}
  **/
 interface ${1:someClass}
-{${4}
+{
+	${4}
 } // END interface $1"
 endsnippet
 
@@ -107,8 +107,7 @@ snippet getter "PHP Class Getter" b
  *
  * ${2:return string}
  */
-public function get${1/\w+\s*/\u$0/}()
-{
+public function get${1/\w+\s*/\u$0/}() {
     return $this->$1;$3
 }
 endsnippet
@@ -120,22 +119,19 @@ snippet setter "PHP Class Setter" b
  * @param ${2:string} $$1                                                                                                                               
  * @return ${3:`!p snip.rv=snip.basename`}
  */
-public function set${1/\w+\s*/\u$0/}(${4:${2/(void|string|int|integer|double|float|object|boolear|null|mixed|number|resource)|(.*)/(?1::$2 )/}}$$1)
-{
+public function set${1/\w+\s*/\u$0/}(${4:${2/(void|string|int|integer|double|float|object|boolear|null|mixed|number|resource)|(.*)/(?1::$2 )/}}$$1) {
     $this->$1 = $$1;$5
     ${6:return $this;}
 }
-$0
 endsnippet
 
 snippet gs "PHP Class Getter Setter" b
 /**
  * Getter for $1
  *
- * return ${2:string}
+ * @return ${2:string}
  */
-public function get${1/\w+\s*/\u$0/}()
-{
+public function get${1/\w+\s*/\u$0/}() {
     return $this->$1;$3
 }
 
@@ -145,12 +141,10 @@ public function get${1/\w+\s*/\u$0/}()
  * @param $2 $$1
  * @return ${4:`!p snip.rv=snip.basename`}
  */
-public function set${1/\w+\s*/\u$0/}(${5:${2/(void|string|int|integer|double|float|object|boolear|null|mixed|number|resource)|(.*)/(?1::$2 )/}}$$1)
-{
+public function set${1/\w+\s*/\u$0/}(${5:${2/(void|string|int|integer|double|float|object|boolear|null|mixed|number|resource)|(.*)/(?1::$2 )/}}$$1) {
     $this->$1 = $$1;$6
     ${7:return $this;}
 }
-$0
 endsnippet
 
 snippet pub "Public function" b
@@ -159,11 +153,9 @@ snippet pub "Public function" b
  *
  * @return ${4:void}
  */
-public function ${1:name}($2)
-{
+public function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet pro "Protected function" b
@@ -172,11 +164,9 @@ snippet pro "Protected function" b
  *
  * @return ${4:void}
  */
-protected function ${1:name}($2)
-{
+protected function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet pri "Private function" b
@@ -185,11 +175,9 @@ snippet pri "Private function" b
  *
  * @return ${4:void}
  */
-private function ${1:name}($2)
-{
+private function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet pubs "Public static function" b
@@ -198,11 +186,9 @@ snippet pubs "Public static function" b
  *
  * @return ${4:void}
  */
-public static function ${1:name}($2)
-{
+public static function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet pros "Protected static function" b
@@ -211,11 +197,9 @@ snippet pros "Protected static function" b
  *
  * @return ${4:void}
  */
-protected static function ${1:name}($2)
-{
+protected static function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet pris "Private static function" b
@@ -224,31 +208,25 @@ snippet pris "Private static function" b
  *
  * @return ${4:void}
  */
-private static function ${1:name}($2)
-{
+private static function ${1:name}($2) {
 	${VISUAL}${5:return null;}
 }
-$0
 endsnippet
 
 snippet fu "Function snip" b
-function ${1:name}($2)
-{
+function ${1:name}($2) {
 	${VISUAL}${3:return null;}
 }
-$0
 endsnippet
 
 snippet fore "Foreach loop"
 foreach($${1:variable} as $${3:value}) {
 	${VISUAL}${4}
 }
-$0
 endsnippet
 
 snippet new "New class instance" b
 $$1 = new $1($2);
-$0
 endsnippet
 
 snippet ife "if else"
@@ -257,7 +235,6 @@ if (${1:/* condition */}) {
 } else {
 	${3:// code...}
 }
-$0
 endsnippet
 
 snippet ns "namespace declaration" b
@@ -270,10 +247,13 @@ if m:
 endsnippet
 
 snippet class "Class declaration template" b
-<?php namespace $1;
+<?php
+
+namespace $1;
 
 class $2
 {
+    $3
 }
 endsnippet
 
@@ -287,10 +267,6 @@ if m:
 	snip.rv = m.group().replace('/', '\\')
 `};
 
-/**
- * Interface ${1:`!p snip.rv=snip.basename`}
- * @author ${2:`!v g:snips_author`}
- */
 interface $1
 {
 	public function ${3:someFunction}();$4                                                                                                              
@@ -302,10 +278,9 @@ snippet construct "__construct()" b
 /**
  * @param $2mixed ${1/, /\n     * \@param mixed /g}
  */
-public function __construct(${1:$dependencies})
-{${1/\$(\w+)(, )*/\n        $this->$1 = $$1;/g}
+public function __construct(${1:$dependencies}) {
+	${1/\$(\w+)(, )*/\n        $this->$1 = $$1;/g}
 }
-$0
 endsnippet
 
 snippet ve "Dumb debug helper in HTML"
@@ -322,8 +297,7 @@ snippet sfa "Symfony 2 Controller action"
 * @Route("/${1:route_name}", name="$1")
 * @Template()
 */
-public function $1Action($2)
-{
+public function $1Action($2) {
 	$3
 	return ${4:array();}$0
 }

@@ -43,8 +43,7 @@ set autoread
 " wrap lines
 set wrap
 set linebreak
-set showbreak=>>>
-set textwidth=80
+set showbreak=+
 
 " store swap and backup files elsewhere (not with the project files)
 set backupdir=~/.vim/backup//

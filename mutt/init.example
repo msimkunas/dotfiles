@@ -1,0 +1,10 @@
+# load the default account
+source $HOME/.mutt/accounts/account.<name_of_account>
+
+# keybindings for switching different accounts
+macro index \e1 '<sync-mailbox><enter-command>source $HOME/.mutt/accounts/account.<name_of_account><enter><change-folder>!<enter>'
+# etc
+
+# source the corresponding account settings when moving to
+# different mailboxes
+folder-hook imaps://username@imap_hostname source $HOME/.mutt/accounts/account.<name_of_account>
