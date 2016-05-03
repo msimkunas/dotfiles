@@ -3,9 +3,7 @@
 CURRENT_OS=$(uname)
 USERNAME=""
 DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .bashrc
-.bash_profile .aliases .exports .utilities .inputrc .i3blocks.conf
-.config/i3/config .Xresources .xinitrc .scripts/change_layout.sh
-.scripts/feh_browser.sh .mutt/colors .mutt/mailcap .mutt/muttrc)
+.bash_profile .aliases .exports .utilities .inputrc)
 MAKE_BACKUPS=true
 
 if [[ "${CURRENT_OS}" == "Darwin" ]]; then
@@ -51,7 +49,7 @@ remove_initial() {
 
 link_dotfiles() {
     # create some directories if necessary
-    local dirs=(.config/i3 .scripts .mutt .vim)
+    local dirs=(.vim)
     
     for dir in "${dirs[@]}"
     do
@@ -80,18 +78,6 @@ link_dotfiles() {
     ln -sfv "${DOTFILES_DIR}"/bash/exports "${HOME_DIR}"/.exports
     ln -sfv "${DOTFILES_DIR}"/bash/utilities "${HOME_DIR}"/.utilities
     ln -sfv "${DOTFILES_DIR}"/bash/inputrc "${HOME_DIR}"/.inputrc
-    # ...for i3
-    ln -sfv "${DOTFILES_DIR}"/i3/config "${HOME_DIR}"/.config/i3/config
-    ln -sfv "${DOTFILES_DIR}"/i3/i3blocks.conf "${HOME_DIR}"/.i3blocks.conf
-    ln -sfv "${DOTFILES_DIR}"/i3/xinitrc "${HOME_DIR}"/.xinitrc
-    # ...for mutt
-    ln -sfv "${DOTFILES_DIR}"/mutt/colors "${HOME_DIR}"/.mutt/colors
-    ln -sfv "${DOTFILES_DIR}"/mutt/mailcap "${HOME_DIR}"/.mutt/mailcap
-    ln -sfv "${DOTFILES_DIR}"/mutt/muttrc "${HOME_DIR}"/.mutt/muttrc
-    # ...misc
-    ln -sfv "${DOTFILES_DIR}"/misc/Xresources "${HOME_DIR}"/.Xresources
-    ln -sfv "${DOTFILES_DIR}"/scripts/change_layout.sh "${HOME_DIR}"/.scripts/change_layout.sh
-    ln -sfv "${DOTFILES_DIR}"/scripts/feh_browser.sh "${HOME_DIR}"/.scripts/feh_browser.sh
 }
 
 # Chown the dotfiles
