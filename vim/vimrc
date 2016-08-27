@@ -55,6 +55,9 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
+let g:airline_theme = "hybrid"
+let g:airline#extensions#tabline#enabled = 1
+
 " disable powerline symbols
 let g:tmuxline_powerline_separators = 0
 
@@ -73,6 +76,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <Leader>[ :bprevious<CR>
+nnoremap <Leader>] :bnext<CR>
+nnoremap <Leader>l :bdelete<CR>
+nnoremap <Leader>s :SyntasticToggleMode<CR>
 
 " Save file using sudo (http://stackoverflow.com/a/7078429)
 cmap w!! w !sudo tee > /dev/null %
