@@ -32,7 +32,7 @@ remove_initial() {
     for dotfile in "${DOTFILES[@]}"
     do
         local filename="${HOME}"/"${dotfile}"
-        if [ -f "${filename}" ]; then
+        if [ -f "${filename}" ] || [ -d "${filename}" ]; then
             if [ "${MAKE_BACKUPS}" = true ]; then
                 local backup_path="${filename}.bak"
 
@@ -42,21 +42,20 @@ remove_initial() {
             fi
             
             # delete the existing dotfile
-            rm -fv "${filename}"
+            rm -rfv "${filename}"
         fi
     done
 }
 
 link_dotfiles() {
     # create some directories if necessary
-    local dirs=(.vim)
+    local dirs=("${DOTFILES_DIR}/vim/backup" "${DOTFILES_DIR}/vim/swap")
     
     for dir in "${dirs[@]}"
     do
-        local dirname="${HOME}"/"${dir}"
-        if [ ! -d "${dirname}" ]; then
-            echo "${dirname} doesn't exist, creating..."
-            mkdir -pv "${dirname}"
+        if [ ! -d "${dir}" ]; then
+            echo "${dir} doesn't exist, creating..."
+            mkdir -pv "${dir}"
         fi
     done
 
