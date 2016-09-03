@@ -66,9 +66,6 @@ let delimitMate_expand_cr=1
 
 " Various shortcuts
 let mapleader = ","
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>p :CtrlP .<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>a :wq<CR>
@@ -83,17 +80,6 @@ nnoremap <Leader>s :SyntasticToggleMode<CR>
 
 " Save file using sudo (http://stackoverflow.com/a/7078429)
 cmap w!! w !sudo tee > /dev/null %
-
-" store cache in a particular directory (as per http://stackoverflow.com/a/22784889)
-let g:ctrlp_cache_dir = $HOME."/.cache/ctrlp"
-
-" ignore certain directories while scanning in ctrlp
-set wildignore+=*/vendor/*,*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.tar.gz
-
-" use ag for scanning
-if executable('ag')
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
 
 " override php syntax highlighting
 function! PhpSyntaxOverride()
