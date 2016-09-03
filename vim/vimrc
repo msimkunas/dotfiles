@@ -55,12 +55,6 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-let g:airline_theme = "hybrid"
-let g:airline#extensions#tabline#enabled = 1
-
-" disable powerline symbols
-let g:tmuxline_powerline_separators = 0
-
 " set up delimitMate to autoindent after braces
 let delimitMate_expand_cr=1
 
@@ -112,3 +106,5 @@ let g:localvimrc_persistent = 2
 " set syntax highlighting for specific filetypes
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.asm set filetype=nasm
+
+let g:netrw_banner = 0

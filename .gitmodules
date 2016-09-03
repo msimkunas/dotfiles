@@ -16,9 +16,6 @@
 [submodule "vim/bundle/tmux-navigator"]
 	path = vim/bundle/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "vim/bundle/tmuxline"]
-	path = vim/bundle/tmuxline
-	url = https://github.com/edkolev/tmuxline.vim.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -40,9 +37,3 @@
 [submodule "vim/bundle/gnupg"]
 	path = vim/bundle/gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
-[submodule "vim/bundle/airline"]
-	path = vim/bundle/airline
-	url = https://github.com/vim-airline/vim-airline.git
-[submodule "vim/bundle/airline-themes"]
-	path = vim/bundle/airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes
