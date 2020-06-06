@@ -10,9 +10,6 @@
 [submodule "vim/bundle/eunuch"]
 	path = vim/pack/plugins/start/eunuch
 	url = https://github.com/tpope/vim-eunuch.git
-[submodule "vim/bundle/localvimrc"]
-	path = vim/pack/plugins/start/localvimrc
-	url = https://github.com/embear/vim-localvimrc
 [submodule "vim/bundle/tmux-navigator"]
 	path = vim/pack/plugins/start/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
@@ -34,9 +31,6 @@
 [submodule "vim/bundle/supertab"]
 	path = vim/pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
-[submodule "vim/bundle/gnupg"]
-	path = vim/pack/plugins/start/gnupg
-	url = https://github.com/jamessan/vim-gnupg.git
 [submodule "vim/bundle/typescript-vim"]
 	path = vim/pack/plugins/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
