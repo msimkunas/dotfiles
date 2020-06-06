@@ -70,9 +70,6 @@ nnoremap <Leader>] :bnext<CR>
 nnoremap <Leader>l :bdelete<CR>
 nnoremap <Leader>s :SyntasticToggleMode<CR>
 
-" Save file using sudo (http://stackoverflow.com/a/7078429)
-cmap w!! w !sudo tee > /dev/null %
-
 " override php syntax highlighting
 function! PhpSyntaxOverride()
     hi! def link phpDocTags  phpDefine
@@ -97,9 +94,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
-
-" Only ask once before sourcing .lvimrc files and remember the decision for the future
-let g:localvimrc_persistent = 2
 
 " set syntax highlighting for specific filetypes
 au BufNewFile,BufRead *.less set filetype=less
