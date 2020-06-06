@@ -1,42 +1,45 @@
 [submodule "vim/bundle/ultisnips"]
-	path = vim/bundle/ultisnips
+	path = vim/pack/plugins/start/ultisnips
 	url = https://github.com/SirVer/ultisnips
 [submodule "vim/bundle/php"]
-	path = vim/bundle/php
+	path = vim/pack/plugins/start/php
 	url = https://github.com/StanAngeloff/php.vim.git
 [submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
+	path = vim/pack/plugins/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/bundle/eunuch"]
-	path = vim/bundle/eunuch
+	path = vim/pack/plugins/start/eunuch
 	url = https://github.com/tpope/vim-eunuch.git
 [submodule "vim/bundle/localvimrc"]
-	path = vim/bundle/localvimrc
+	path = vim/pack/plugins/start/localvimrc
 	url = https://github.com/embear/vim-localvimrc
 [submodule "vim/bundle/tmux-navigator"]
-	path = vim/bundle/tmux-navigator
+	path = vim/pack/plugins/start/tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
 [submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+	path = vim/pack/plugins/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "vim/bundle/javascript"]
-	path = vim/bundle/javascript
+	path = vim/pack/plugins/start/javascript
 	url = https://github.com/pangloss/vim-javascript.git
 [submodule "vim/bundle/php-refactoring-toolbox"]
-	path = vim/bundle/php-refactoring-toolbox
+	path = vim/pack/plugins/start/php-refactoring-toolbox
 	url = https://github.com/adoy/vim-php-refactoring-toolbox.git
 [submodule "vim/bundle/delimit-mate"]
-	path = vim/bundle/delimit-mate
+	path = vim/pack/plugins/start/delimit-mate
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule "vim/bundle/hybrid"]
-	path = vim/bundle/hybrid
+	path = vim/pack/plugins/start/hybrid
 	url = https://github.com/w0ng/vim-hybrid.git
 [submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
+	path = vim/pack/plugins/start/supertab
 	url = https://github.com/ervandew/supertab.git
 [submodule "vim/bundle/gnupg"]
-	path = vim/bundle/gnupg
+	path = vim/pack/plugins/start/gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
 [submodule "vim/bundle/typescript-vim"]
-	path = vim/bundle/typescript-vim
+	path = vim/pack/plugins/start/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "vim/pack/plugins/start/ctrlp.vim"]
+	path = vim/pack/plugins/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
