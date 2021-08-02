@@ -49,7 +49,7 @@ remove_initial() {
 
 link_dotfiles() {
     # create some directories if necessary
-    local dirs=("${DOTFILES_DIR}/vim/backup" "${DOTFILES_DIR}/vim/swap")
+    local dirs=("${DOTFILES_DIR}/vim/backup" "${DOTFILES_DIR}/vim/swap" "${HOME}/.config/nvim")
     
     for dir in "${dirs[@]}"
     do
@@ -65,6 +65,8 @@ link_dotfiles() {
     # ...for vim
     ln -sfv "${DOTFILES_DIR}"/vim "${HOME_DIR}"/.vim
     ln -sfv "${DOTFILES_DIR}"/vim/vimrc "${HOME_DIR}"/.vimrc
+    # ...for nvim
+    ln -sfv "${DOTFILES_DIR}"/vim/init.vim "${HOME_DIR}"/.config/nvim/init.vim
     # ...for git
     ln -sfv "${DOTFILES_DIR}"/git/gitconfig "${HOME_DIR}"/.gitconfig
     # ...for tmux
@@ -87,6 +89,17 @@ chown_dotfiles() {
     do
         chown -R "${USERNAME}":"${GROUP}" "${HOME_DIR}"/"${dotfile}"
     done
+}
+
+setup_vim() {
+    echo "Setting up vim..."
+    echo "Installing vim-plug..."
+
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    echo "Installing vim plugins..."
+    nvim -es -u ${HOME}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
 }
 
 while getopts ":hu:c" opt; do
@@ -131,5 +144,6 @@ echo "Group: ${GROUP}"
 remove_initial
 link_dotfiles
 chown_dotfiles
+setup_vim
 
 echo "Installation finished!"
