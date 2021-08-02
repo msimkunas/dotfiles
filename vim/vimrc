@@ -1,3 +1,40 @@
+" Install vim-plug if not found.
+" See https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin('~/.vim/plugged')
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
+    Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
+    Plug 'phpactor/ncm2-phpactor'
+    Plug 'tpope/vim-fugitive'
+    Plug 'preservim/nerdtree'
+    Plug 'SirVer/ultisnips'
+    Plug 'StanAngeloff/php.vim'
+    Plug 'scrooloose/nerdcommenter'
+    Plug 'tpope/vim-eunuch'
+    Plug 'christoomey/vim-tmux-navigator'
+    Plug 'scrooloose/syntastic'
+    Plug 'pangloss/vim-javascript'
+    Plug 'adoy/vim-php-refactoring-toolbox'
+    Plug 'Raimondi/delimitMate'
+    Plug 'w0ng/vim-hybrid'
+    Plug 'ervandew/supertab'
+    Plug 'leafgarland/typescript-vim'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+call plug#end()
+
 syntax on
 set background=dark
 colorscheme hybrid
@@ -69,6 +106,11 @@ nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
 nnoremap <Leader>l :bdelete<CR>
 nnoremap <Leader>s :SyntasticToggleMode<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>p :Ag<CR>
+nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>t :NERDTree<CR>
+nnoremap <Leader>b :bNext<CR>
 
 " override php syntax highlighting
 function! PhpSyntaxOverride()
@@ -86,10 +128,6 @@ let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 " Syntastic configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -98,3 +136,8 @@ let g:syntastic_check_on_wq = 0
 " set syntax highlighting for specific filetypes
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.asm set filetype=nasm
+
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+
+let g:airline#extensions#tabline#enabled = 1
