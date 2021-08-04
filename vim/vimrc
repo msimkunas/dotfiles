@@ -90,11 +90,10 @@ nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
 nnoremap <Leader>l :bdelete<CR>
 nnoremap <Leader>s :SyntasticToggleMode<CR>
-nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>f :ProjectFiles<CR>
 nnoremap <Leader>p :Ag<CR>
 nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>t :NERDTree<CR>
-nnoremap <Leader>b :bNext<CR>
 
 " Override php syntax highlighting
 function! PhpSyntaxOverride()
@@ -144,3 +143,10 @@ au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.asm set filetype=nasm
 
 let g:airline#extensions#tabline#enabled = 1
+
+" See https://github.com/junegunn/fzf.vim/issues/47#issuecomment-160237795
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
