@@ -115,6 +115,7 @@ setup_coc() {
     # See https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 
     # Install extensions
+    echo "Installing coc extensions..."
     mkdir -p ${HOME}/.config/coc/extensions
     cd ${HOME}/.config/coc/extensions
     if [ ! -f package.json ]; then
