@@ -105,6 +105,10 @@ setup_vim() {
 
     echo "Installing vim plugins..."
     nvim -es -u ${HOME}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
+
+    # See https://github.com/neoclide/coc-snippets/issues/196#issuecomment-781231190
+    echo "Upgrading pynvim..."
+    python3 -m pip install --user --upgrade pynvim
 }
 
 setup_coc() {
@@ -117,7 +121,7 @@ setup_coc() {
         echo '{"dependencies":{}}' > package.json
     fi
 
-    npm install coc-phpls coc-tsserver --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+    npm install coc-phpls coc-tsserver coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
     cd -
 }
 
