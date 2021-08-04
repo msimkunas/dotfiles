@@ -26,6 +26,10 @@ colorscheme hybrid
 " indent files based on filetype
 filetype plugin indent on
 
+" Use the system clipboard.
+" See https://stackoverflow.com/a/30691754
+set clipboard^=unnamed,unnamedplus
+
 " make backspace behave normally
 set backspace=2
 " display line numbers
