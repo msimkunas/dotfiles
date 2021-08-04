@@ -1,13 +1,10 @@
 call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-    Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
-    Plug 'ncm2/ncm2'
-    Plug 'roxma/nvim-yarp'
-    Plug 'phpactor/ncm2-phpactor'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'tpope/vim-fugitive'
     Plug 'preservim/nerdtree'
-    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
     Plug 'StanAngeloff/php.vim'
     Plug 'scrooloose/nerdcommenter'
     Plug 'tpope/vim-eunuch'
@@ -17,7 +14,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'adoy/vim-php-refactoring-toolbox'
     Plug 'Raimondi/delimitMate'
     Plug 'w0ng/vim-hybrid'
-    Plug 'ervandew/supertab'
     Plug 'leafgarland/typescript-vim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -100,7 +96,7 @@ nnoremap <Leader>gc :Commits<CR>
 nnoremap <Leader>t :NERDTree<CR>
 nnoremap <Leader>b :bNext<CR>
 
-" override php syntax highlighting
+" Override php syntax highlighting
 function! PhpSyntaxOverride()
     hi! def link phpDocTags  phpDefine
     hi! def link phpDocParam phpType
@@ -111,9 +107,31 @@ augroup phpSyntaxOverride
     autocmd FileType php call PhpSyntaxOverride()
 augroup END
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+" Configure coc
+" See https://github.com/neoclide/coc.nvim#example-vim-configuration
+
+" Use tab for triggering autocompletion
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Code navigation shortcuts
+nmap <Leader>gd <Plug>(coc-definition)
+nmap <Leader>gt <Plug>(coc-type-definition)
+nmap <Leader>gi <Plug>(coc-implementation)
+nmap <Leader>gr <Plug>(coc-references)
 
 " Syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
@@ -124,8 +142,5 @@ let g:syntastic_check_on_wq = 0
 " set syntax highlighting for specific filetypes
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.asm set filetype=nasm
-
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 
 let g:airline#extensions#tabline#enabled = 1

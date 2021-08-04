@@ -93,13 +93,32 @@ chown_dotfiles() {
 
 setup_vim() {
     echo "Setting up vim..."
-    echo "Installing vim-plug..."
 
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    if [ -f ${HOME}/.vim/autoload/plug.vim ]; then
+        echo "vim-plug already installed, upgrading..."
+    else
+        echo "Installing vim-plug..."
+    fi
+
+    curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     echo "Installing vim plugins..."
     nvim -es -u ${HOME}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
+}
+
+setup_coc() {
+    # See https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+
+    # Install extensions
+    mkdir -p ${HOME}/.config/coc/extensions
+    cd ${HOME}/.config/coc/extensions
+    if [ ! -f package.json ]; then
+        echo '{"dependencies":{}}' > package.json
+    fi
+
+    npm install coc-phpls --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+    cd -
 }
 
 while getopts ":hu:c" opt; do
@@ -145,5 +164,6 @@ remove_initial
 link_dotfiles
 chown_dotfiles
 setup_vim
+setup_coc
 
 echo "Installation finished!"
