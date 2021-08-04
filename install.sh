@@ -121,7 +121,7 @@ setup_coc() {
         echo '{"dependencies":{}}' > package.json
     fi
 
-    npm install coc-phpls coc-tsserver coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+    npm install coc-phpls coc-tsserver coc-html coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
     cd -
 }
 
