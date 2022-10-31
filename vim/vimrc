@@ -1,6 +1,6 @@
 syntax on
 set background=dark
-"colorscheme hybrid
+colorscheme hybrid
 
 " indent files based on filetype
 filetype plugin indent on
