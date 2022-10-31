@@ -1,27 +1,6 @@
-call plug#begin('~/.vim/plugged')
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'tpope/vim-fugitive'
-    Plug 'preservim/nerdtree'
-    Plug 'honza/vim-snippets'
-    Plug 'StanAngeloff/php.vim'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'tpope/vim-eunuch'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'scrooloose/syntastic'
-    Plug 'pangloss/vim-javascript'
-    Plug 'adoy/vim-php-refactoring-toolbox'
-    Plug 'Raimondi/delimitMate'
-    Plug 'w0ng/vim-hybrid'
-    Plug 'leafgarland/typescript-vim'
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-call plug#end()
-
 syntax on
 set background=dark
-colorscheme hybrid
+"colorscheme hybrid
 
 " indent files based on filetype
 filetype plugin indent on
@@ -48,8 +27,6 @@ set smartcase
 
 set incsearch
 set nohlsearch
-
-set nowrap
 
 set splitbelow
 set splitright
@@ -78,9 +55,6 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-" set up delimitMate to autoindent after braces
-let delimitMate_expand_cr=1
-
 " Various shortcuts
 let mapleader = ","
 nnoremap <Leader>w :w<CR>
@@ -93,64 +67,3 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <Leader>[ :bprevious<CR>
 nnoremap <Leader>] :bnext<CR>
 nnoremap <Leader>l :bdelete<CR>
-nnoremap <Leader>s :SyntasticToggleMode<CR>
-nnoremap <Leader>f :ProjectFiles<CR>
-nnoremap <Leader>p :Ag<CR>
-nnoremap <Leader>gc :Commits<CR>
-nnoremap <Leader>t :NERDTree<CR>
-
-" Override php syntax highlighting
-function! PhpSyntaxOverride()
-    hi! def link phpDocTags  phpDefine
-    hi! def link phpDocParam phpType
-endfunction
-
-augroup phpSyntaxOverride
-    autocmd!
-    autocmd FileType php call PhpSyntaxOverride()
-augroup END
-
-" Configure coc
-" See https://github.com/neoclide/coc.nvim#example-vim-configuration
-
-" Use tab for triggering autocompletion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Code navigation shortcuts
-nmap <Leader>gd <Plug>(coc-definition)
-nmap <Leader>gt <Plug>(coc-type-definition)
-nmap <Leader>gi <Plug>(coc-implementation)
-nmap <Leader>gr <Plug>(coc-references)
-
-" Syntastic configuration
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-" set syntax highlighting for specific filetypes
-au BufNewFile,BufRead *.less set filetype=less
-au BufRead,BufNewFile *.asm set filetype=nasm
-
-let g:airline#extensions#tabline#enabled = 1
-
-" See https://github.com/junegunn/fzf.vim/issues/47#issuecomment-160237795
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
-command! ProjectFiles execute 'Files' s:find_git_root()

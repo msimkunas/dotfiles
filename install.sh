@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/zsh
 
 CURRENT_OS=$(uname)
 USERNAME=""
-DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .bashrc
-.bash_profile .aliases .exports .utilities .inputrc)
+DOTFILES=(.vim .vimrc .gitconfig .tmux.conf .tmux_snapshot.conf .zshrc
+.zprofile .aliases .exports .utilities .inputrc)
 MAKE_BACKUPS=true
 
 if [[ "${CURRENT_OS}" == "Darwin" ]]; then
@@ -38,11 +38,11 @@ remove_initial() {
 
                 # make a backup of the existing file
                 echo "${filename} exists, saving a backup to: ${backup_path}"
-                cat "${filename}" > "${backup_path}"
+                cp -r "${filename}" "${backup_path}"
             fi
             
             # delete the existing dotfile
-            rm -rfv "${filename}"
+            rm -riv "${filename}"
         fi
     done
 }
@@ -72,13 +72,13 @@ link_dotfiles() {
     # ...for tmux
     ln -sfv "${DOTFILES_DIR}"/tmux/tmux.conf "${HOME_DIR}"/.tmux.conf
     ln -sfv "${DOTFILES_DIR}"/tmux/tmux_snapshot.conf "${HOME_DIR}"/.tmux_snapshot.conf
-    # ...for bash
-    ln -sfv "${DOTFILES_DIR}"/bash/bash_profile "${HOME_DIR}"/.bash_profile
-    ln -sfv "${DOTFILES_DIR}"/bash/bashrc "${HOME_DIR}"/.bashrc
-    ln -sfv "${DOTFILES_DIR}"/bash/aliases "${HOME_DIR}"/.aliases
-    ln -sfv "${DOTFILES_DIR}"/bash/exports "${HOME_DIR}"/.exports
-    ln -sfv "${DOTFILES_DIR}"/bash/utilities "${HOME_DIR}"/.utilities
-    ln -sfv "${DOTFILES_DIR}"/bash/inputrc "${HOME_DIR}"/.inputrc
+    # ...for zsh
+    ln -sfv "${DOTFILES_DIR}"/zsh/zprofile "${HOME_DIR}"/.zprofile
+    ln -sfv "${DOTFILES_DIR}"/zsh/zshrc "${HOME_DIR}"/.zshrc
+    ln -sfv "${DOTFILES_DIR}"/zsh/aliases "${HOME_DIR}"/.aliases
+    ln -sfv "${DOTFILES_DIR}"/zsh/exports "${HOME_DIR}"/.exports
+    ln -sfv "${DOTFILES_DIR}"/zsh/utilities "${HOME_DIR}"/.utilities
+    ln -sfv "${DOTFILES_DIR}"/zsh/inputrc "${HOME_DIR}"/.inputrc
 }
 
 # Chown the dotfiles
@@ -89,41 +89,6 @@ chown_dotfiles() {
     do
         chown -R "${USERNAME}":"${GROUP}" "${HOME_DIR}"/"${dotfile}"
     done
-}
-
-setup_vim() {
-    echo "Setting up vim..."
-
-    if [ -f ${HOME}/.vim/autoload/plug.vim ]; then
-        echo "vim-plug already installed, upgrading..."
-    else
-        echo "Installing vim-plug..."
-    fi
-
-    curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    echo "Installing vim plugins..."
-    nvim -es -u ${HOME}/.config/nvim/init.vim -i NONE -c "PlugInstall" -c "qa"
-
-    # See https://github.com/neoclide/coc-snippets/issues/196#issuecomment-781231190
-    echo "Upgrading pynvim..."
-    python3 -m pip install --user --upgrade pynvim
-}
-
-setup_coc() {
-    # See https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
-
-    # Install extensions
-    echo "Installing coc extensions..."
-    mkdir -p ${HOME}/.config/coc/extensions
-    cd ${HOME}/.config/coc/extensions
-    if [ ! -f package.json ]; then
-        echo '{"dependencies":{}}' > package.json
-    fi
-
-    npm install coc-phpls coc-tsserver coc-html coc-snippets --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
-    cd -
 }
 
 while getopts ":hu:c" opt; do
@@ -168,7 +133,5 @@ echo "Group: ${GROUP}"
 remove_initial
 link_dotfiles
 chown_dotfiles
-setup_vim
-setup_coc
 
 echo "Installation finished!"

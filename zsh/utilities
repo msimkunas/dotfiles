@@ -30,36 +30,3 @@ function extract {
         fi
     fi
 }
-
-# bootstrap a project with some docker containers
-function project {
-    ERRORS=0
-    if [ -z "$1" ] || [ -z "$2" ]; then
-        echo "Usage: project <path/to/project/dir> <project_template>"
-    else
-        if [ -d "$1" ]; then
-            echo "The directory \"$1\" already exists."
-            ERRORS=1
-        fi
-
-        TEMPLATE_PATH="$PROJECT_TEMPLATES"/"$2"
-
-        if [ ! -d "$TEMPLATE_PATH" ]; then
-            echo "The project template \"$2\" doesn't exist."
-            ERRORS=1
-        fi
-
-        if [ "$ERRORS" -eq 0 ]; then
-            echo "Creating $1..."
-            mkdir -p "$1"
-            cp -r "$TEMPLATE_PATH"/* "$1"
-            
-            # print the readme of the template
-            if [ -f "$1"/README.md ]; then
-                cat "$1"/README.md
-            fi
-
-            echo "A new empty project \"$2\" has been configured."
-        fi
-    fi
-}
