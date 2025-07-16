@@ -49,12 +49,6 @@ set showbreak=+
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
 
-" Allow resizing vim splits with a mouse in tmux
-set mouse+=a
-if &term =~ '^screen'
-    set ttymouse=xterm2
-endif
-
 " Various shortcuts
 let mapleader = ","
 nnoremap <Leader>w :w<CR>
