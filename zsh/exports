@@ -1,0 +1,12 @@
+# Enable 256 color support in the terminal
+export TERM="screen-256color"
+
+# Set the default editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+
+# Export npm prefix path
+export PATH="$HOME/.local/bin:$PATH"
+
+# Prompt colors (generated with http://bashrcgenerator.com/)
+export PROMPT="%108F%n%252F@%102F%m %15F%~ %108F%# %15F"

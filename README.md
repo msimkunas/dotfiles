@@ -6,16 +6,12 @@ The dotfiles for my local development environment. This "readme" is intended as 
 
 This installation script **deletes certain files** prior to installation. These dotfiles and their installation script come without warranty of any kind. Use this script at your own risk.
 
-# Requirements
-
-- NodeJS
-
 # Installation
 
 To install the dotfiles, provide your username.
 
 ```
-bash install.sh -u username
+./install.sh -u username
 ```
 
 **Note:** If installing on Linux, the default user group is equivalent to the provided username, if on OSX - the user group is `staff`.
@@ -25,8 +21,7 @@ bash install.sh -u username
 The following local configurations are supported:
 
 - `.gitconfig_local`
-- `.bash_local`
-- `.lvimrc` (for each project)
+- `.zsh_local`
 
 # Disclaimer
 

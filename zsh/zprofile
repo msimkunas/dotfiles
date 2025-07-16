@@ -1,0 +1,4 @@
+# Source the ~/.zshrc file in case ~/.zprofile gets loaded first
+if [ -f ~/.zshrc ]; then
+    source ~/.zshrc
+fi
